@@ -12,4 +12,4 @@ async def on_ready():
 async def load(ctx, extention):
     client.load_extension()
 
-client.run('TOKEN')
+client.run(config('TOKEN'))
