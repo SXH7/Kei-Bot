@@ -1,9 +1,6 @@
 import discord
 from discord.ext import commands
 
-file = open('token.txt', 'r')
-data = file.read()
-
 intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
 client = commands.Bot(command_prefix = 'k!', intents = intents)
 
