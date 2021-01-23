@@ -14,7 +14,7 @@ class gif(commands.Cog):
     async def gif(self, ctx, *, query):
         rand = random.randint(0, 19)
         term = 'anime '+query
-        search = "https://api.tenor.com/v1/search?q=" + term +"&key=NVTZ7ZVRG92Y&limit=20&media_filter=basic"
+        search = "https://api.tenor.com/v1/search?q=" + term +"&key={key}&limit=20&media_filter=basic"
         random_request = requests.get(search)
         if random_request.status_code == 200:
             try:
@@ -34,7 +34,7 @@ class gif(commands.Cog):
     @commands.command()
     async def hug(self, ctx, *, string=None):
         rand = random.randint(0, 19)
-        search = "https://api.tenor.com/v1/search?q=animehug&key=NVTZ7ZVRG92Y&limit=20&media_filter=basic"
+        search = "https://api.tenor.com/v1/search?q=animehug&key={key}&limit=20&media_filter=basic"
         random_request = requests.get(search)
         if random_request.status_code == 200:
             try:
