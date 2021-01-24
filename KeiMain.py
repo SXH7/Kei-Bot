@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands, tasks
 import os
 from itertools import cycle
+from PIL import Image, ImageDraw, ImageFont
 
 file = open('TOKEN.txt', 'r')
 data = file.read()
@@ -53,6 +54,19 @@ async def on_member_join(member):
     rules = client.get_channel(688009156179132431)
     await client.get_channel(682540092992389228).send(f"Everybody welcome the newest member of {member.guild.name}, {member.mention}. You can get your roles from {self_roles.mention}."
                                                       f" Read the rules here {rules.mention}. Enjoy yourself, contact the mods or admins if you have any issues.")
+
+    img = Image.open("background.png")
+    draw = ImageDraw.Draw(img)
+    font1 = ImageFont.truetype("KGALittleSpark.ttf", 90)
+    font2 = ImageFont.truetype("RowanMaskide.ttf", 90)
+
+    textvar = member.name
+    draw.text((100, 50), "Welcome to the server!", (0, 0, 0), font=font2, stroke_width=3, stroke_fill="#ffffff")
+    draw.text((100, 185), textvar, (0, 0, 0), font=font1, stroke_width=3, stroke_fill="#ffffff")
+    img.save('img.png')
+    file=discord.File('img.png')
+    await client.get_channel(688005133602259056).send(f"Welcome to the server {member.mention}. Have a great time here!")
+    await client.get_channel(688005133602259056).send(file= file)
 
 
 for filename in os.listdir('./cogs'):
