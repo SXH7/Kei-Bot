@@ -6,6 +6,11 @@ from PIL import Image, ImageDraw, ImageFont
 
 file = open('TOKEN.txt', 'r')
 data = file.read()
+print(data)
+
+file2 = open('bannedword.txt', 'r')
+bannedWords = file2.read().split()
+print(bannedWords)
 
 status = cycle(["discord.gg/bb8bTCr", "weedboii face reveal go brrr", "'bie' hai saale 'bye' nahi", "piyush harami", "pro editor in the houes, Deku#7015"])
 
@@ -73,5 +78,13 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
+@client.event
+async def on_message(message):
+    for each in bannedWords:
+        if(message.content == each):
+            await message.delete()
+
+    await client.process_commands(message)
 
 client.run(data)
+
