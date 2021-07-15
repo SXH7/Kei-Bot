@@ -3,26 +3,35 @@ from discord.ext import commands, tasks
 import os
 from itertools import cycle
 from PIL import Image, ImageDraw, ImageFont
+import time
+from time import gmtime, strftime
+import random
 
 file = open('TOKEN.txt', 'r')
 data = file.read()
-print(data)
 
 file2 = open('bannedword.txt', 'r')
 bannedWords = file2.read().split()
-print(bannedWords)
 
-status = cycle(["discord.gg/bb8bTCr", "weedboii face reveal go brrr", "'bie' hai saale 'bye' nahi", "piyush harami", "pro editor in the houes, Deku#7015"])
+status = cycle(["discord.gg/bb8bTCr", "weedboii face reveal go brrr", "'bie' hai saale 'bye' nahi", "darby harami", "pro editor in the houes, Deku#7015"])
 
 intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
 client = commands.Bot(command_prefix = 'k!', intents = intents)
 
+night_time = ["04 PM", "05 PM", "06 PM", "07 PM", "08 PM", "09 PM", "10 PM", "11 PM", "12 AM", "01 AM", "02 AM"]
 
+water_images = ['https://imgur.com/zh6HuZd',
+                'https://imgur.com/QdLWeFA',
+                'https://imgur.com/zYycm6n',
+                'https://imgur.com/FpehOvj',
+                'https://imgur.com/z7mViLc',
+                'https://imgur.com/a/8wrl5pc']
 
 # READY INDICATOR
 @client.event
 async def on_ready():
     change_game.start()
+    water_reminder.start()
     print("The bot is ready.")
 
 
@@ -57,8 +66,9 @@ async def change_game():
 async def on_member_join(member):
     self_roles = client.get_channel(711422716875636807)
     rules = client.get_channel(688009156179132431)
+    intro = client.get_channel(692049221431590982)
     await client.get_channel(682540092992389228).send(f"Everybody welcome the newest member of {member.guild.name}, {member.mention}. You can get your roles from {self_roles.mention}."
-                                                      f" Read the rules here {rules.mention}. Enjoy yourself, contact the mods or admins if you have any issues.")
+                                                      f" Read the rules here {rules.mention}, introduce yourself in {intro.mention}. Enjoy yourself, contact the mods or admins if you have any issues.")
 
     img = Image.open("background.png")
     draw = ImageDraw.Draw(img)
@@ -86,5 +96,13 @@ async def on_message(message):
 
     await client.process_commands(message)
 
+@tasks.loop(hours=1.0)
+async def water_reminder():
+    picture = random.randint(0, 5)
+    timegmt = time.strftime("%I %p", time.gmtime())
+    if(timegmt in night_time):
+        print(timegmt)
+    else:
+        await client.get_channel(682540092992389228).send("<@&849874571829313537> Go drink water <:water:855361454235320360>\n "+water_images[picture])
+#<@&849874571829313537>
 client.run(data)
-
