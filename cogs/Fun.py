@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import praw
 import random
-import anilist
+#import anilist
 
 
 reddit = praw.Reddit(client_id = "tpThwIQjP1tYhA",
@@ -23,8 +23,6 @@ class FunCommands(commands.Cog):
 
     @commands.command()
     async def reddit(self, ctx, sub: str = ""):
-        '''if(sub == "hentai" or sub == "porn" or sub == "fiftyfifty" or sub == "Hentai" or sub == "Porn"):
-            await ctx.send(file=discord.File('bonk.png'))'''
         subreddit = reddit.subreddit(sub)
         hot = subreddit.hot(limit = 100)
         allsub = []
@@ -39,7 +37,7 @@ class FunCommands(commands.Cog):
         em.set_image(url = url)
         if post.over_18:
             await ctx.send("https://imgur.com/a/5HKgTzU")
-        if(sub != "hentai" and sub != "porn" and sub != "fiftyfifty"):
+        else:
             await ctx.send(embed = em)
 
 
