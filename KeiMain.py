@@ -25,7 +25,10 @@ water_images = ['https://imgur.com/zh6HuZd',
                 'https://imgur.com/zYycm6n',
                 'https://imgur.com/FpehOvj',
                 'https://imgur.com/z7mViLc',
-                'https://imgur.com/a/8wrl5pc']
+                'https://imgur.com/a/8wrl5pc',
+                'https://imgur.com/qWzAqyb',
+                'https://imgur.com/IDk36ZB',
+                'https://imgur.com/Xx5ZOPd']
 
 # READY INDICATOR
 @client.event
@@ -98,7 +101,7 @@ async def on_message(message):
 
 @tasks.loop(hours=1.0)
 async def water_reminder():
-    picture = random.randint(0, 5)
+    picture = random.randint(0, 8)
     timegmt = time.strftime("%I %p", time.gmtime())
     if(timegmt in night_time):
         print(timegmt)
