@@ -6,7 +6,8 @@ from discord.utils import get
 
 triggers = ['sx', 'darby', 'deku', 'harsh', 'sakamoto', 'vanshika', 'weedboii',
             'diven', 'keshav', 'dazai', 'diablo', 'fak', 'remon', 'ishan', 'shlok', 'bisim']
-responses = ['https://tenor.com/view/smiley-3d-vibe-check-creepy-gif-15669762', 'Hawas ka pujaari',
+responses = ['https://tenor.com/view/smiley-3d-vibe-check-creepy-gif-15669762',
+             'https://media.discordapp.net/attachments/648031568756998158/859925392709517332/image0.gif',
              'They call me P-R-O-P-H-E-T I count up all the thots I see!', 'gareeb bas naam se',
              'Pervertization', 'nub', 'did you mean priya?',
              "Diven? Who's that bitch <:holup:783200762007650304>",
@@ -67,6 +68,16 @@ class misc(commands.Cog):
                     index_t = triggers.index(trig)
                     response = responses[index_t]
                     await message.channel.send(response)
+
+    @commands.command()
+    async def togglewater(self, ctx):
+        role = discord.utils.get(ctx.guild.roles, name= "WaterPing")
+        if role not in ctx.author.roles:
+            await ctx.author.add_roles(role)
+            await ctx.channel.send("The WaterPing role was given to you!")
+        else:
+            await ctx.author.remove_roles(role)
+            await ctx.channel.send("The WaterPing role was taken from you.")
 
 
     @commands.command()
