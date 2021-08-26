@@ -4,7 +4,6 @@ import os
 from itertools import cycle
 from PIL import Image, ImageDraw, ImageFont
 import time
-from time import gmtime, strftime
 import random
 
 file = open('TOKEN.txt', 'r')
