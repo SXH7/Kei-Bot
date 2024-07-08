@@ -7,11 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 #import anilist
 
 
-reddit = praw.Reddit(client_id = "tpThwIQjP1tYhA",
-                     client_secret = "iiz8VruzO5y2XRksqClXxQxC6hXCIQ",
-                     username = "shashwat_senpai",
-                     password = "shashwwat@reddit",
-                     user_agent = "Kei Bot")
+reddit = praw.Reddit()
 
 defaultUserUrl = 'https://anilist.co/user/'
 
